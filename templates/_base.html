@@ -11,13 +11,13 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #f4f4f9; /* Fondo suave */
             color: #333;
         }
 
         /* Navbar personalizada */
         .custom-navbar {
-            background-color: #001a33;
+            background-color: #001a33; /* Azul más oscuro */
             padding: 10px 20px;
             position: relative;
         }
@@ -194,6 +194,38 @@
             background-color: #003366;
         }
 
+        /* Estilos responsive */
+        @media (max-width: 768px) {
+            .custom-navbar .navbar-collapse {
+                width: 100%;
+                left: 0;
+            }
+            .container {
+                padding: 10px;
+                margin: 10px;
+            }
+            .new-post-btn, .logout-btn {
+                width: 100%;
+            }
+            .post {
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .custom-navbar .navbar-brand {
+                font-size: 1.5rem;
+            }
+            .custom-navbar .navbar-toggler {
+                font-size: 1.2rem;
+            }
+            .post-title {
+                font-size: 1.2rem;
+            }
+            .post-content {
+                font-size: 0.9rem;
+            }
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -212,20 +244,16 @@
                 collapse.classList.remove("show");
             });
 
-            if (newPostBtn) {
-                newPostBtn.addEventListener("click", function(e) {
-                    e.preventDefault();
-                    newPostForm.style.display = newPostForm.style.display === "none" ? "block" : "none";
-                });
-            }
+            newPostBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                newPostForm.style.display = newPostForm.style.display === "none" ? "block" : "none";
+            });
 
-            if (logoutBtn) {
-                logoutBtn.addEventListener("click", function(e) {
-                    e.preventDefault();
-                    alert("Has cerrado sesión correctamente.");
-                    window.location.href = "logout.html";
-                });
-            }
+            logoutBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                alert("Has cerrado sesión correctamente.");
+                window.location.href = "logout.html";
+            });
         });
     </script>
 </head>
@@ -264,23 +292,4 @@
 
         <div class="post">
             <h2 class="post-title">Título del Post 2</h2>
-            <p class="post-content">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="#">Leer más...</a></p>
-        </div>
-
-        <a href="#" class="new-post-btn">Nuevo Post</a>
-
-        <form class="new-post-form">
-            <input type="text" placeholder="Título del Post" required>
-            <textarea placeholder="Contenido del Post" rows="5" required></textarea>
-            <button type="submit">Publicar</button>
-            
-        </form>
-
-        <a href="#" class="logout-btn">Cerrar Sesión</a>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Mi Empresa. Todos los derechos reservados.</p>
-    </footer>
-</body>
-</html>
+            <p class="post-content">Sed do eiusmod tempor incididunt ut labore
