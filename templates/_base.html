@@ -4,20 +4,283 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- CSS interno para estilos personalizados -->
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Navbar personalizada */
+        .custom-navbar {
+            background-color: #001a33;
+            padding: 10px 20px;
+            position: relative;
+        }
+        .custom-navbar .navbar-brand {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 2rem;
+            text-align: center;
+            margin: 0;
+        }
+        .custom-navbar .navbar-brand img {
+            display: block;
+            margin: 10px auto 0;
+        }
+        .custom-navbar .navbar-toggler {
+            border: none;
+            background: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .custom-navbar .navbar-toggler:focus {
+            outline: none;
+        }
+        .custom-navbar .navbar-collapse {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            background-color: #001a33;
+            width: 150px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
+        .custom-navbar .navbar-collapse.show {
+            display: block;
+        }
+        .custom-navbar .nav-link {
+            color: #ffffff;
+            font-size: 1.2rem;
+            padding: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: block;
+            text-align: left;
+        }
+        .custom-navbar .nav-link:hover {
+            background-color: #003366;
+        }
+
+        /* Contenido */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos de los títulos */
+        h1, h2 {
+            font-weight: bold;
+            color: #001a33;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para los posts */
+        .post {
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+        }
+        .post:last-child {
+            border-bottom: none;
+        }
+        .post-title {
+            font-size: 1.5rem;
+            color: #001a33;
+            margin-bottom: 10px;
+        }
+        .post-content {
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .post a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .post a:hover {
+            text-decoration: underline;
+        }
+
+        /* Botón Nuevo Post */
+        .new-post-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #001a33;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .new-post-btn:hover {
+            background-color: #003366;
+        }
+
+        /* Botón Logout */
+        .logout-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #001a33;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .logout-btn:hover {
+            background-color: #003366;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #001a33;
+            color: #ffffff;
+            margin-top: 20px;
+        }
+
+        /* Formulario Nuevo Post */
+        .new-post-form {
+            display: none;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .new-post-form input, .new-post-form textarea {
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .new-post-form button {
+            display: block;
+            width: 100%;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 1rem;
+            color: white;
+            background-color: #001a33;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .new-post-form button:hover {
+            background-color: #003366;
+        }
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggler = document.querySelector(".navbar-toggler");
+            const collapse = document.querySelector(".navbar-collapse");
+            const newPostBtn = document.querySelector(".new-post-btn");
+            const newPostForm = document.querySelector(".new-post-form");
+            const logoutBtn = document.querySelector(".logout-btn");
+
+            toggler.addEventListener("click", function(e) {
+                e.stopPropagation();
+                collapse.classList.toggle("show");
+            });
+
+            document.addEventListener("click", function() {
+                collapse.classList.remove("show");
+            });
+
+            if (newPostBtn) {
+                newPostBtn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    newPostForm.style.display = newPostForm.style.display === "none" ? "block" : "none";
+                });
+            }
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    alert("Has cerrado sesión correctamente.");
+                    window.location.href = "logout.html";
+                });
+            }
+        });
+    </script>
 </head>
 <body>
-    <a href="{% url 'blog-home' %}"><h1>Blog Nov</h1></a>
-    
-    <form method="post" action="{% url 'logout' %}">
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid">
+            <!-- Nombre de la empresa -->
+            <div class="navbar-brand">Mi Empresa</div>
+            <img src="logo.png" alt="Logo" width="80" height="80" class="navbar-brand">
+            <!-- Botón de colapso para móviles -->
+            <button class="navbar-toggler" type="button">&#9776;</button>
+            <!-- Elementos de la navbar -->
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Acerca de</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        {% csrf_token %}
-        <input type="submit" value="Logout">
+    <div class="container">
+        <h1>Bienvenidos a Mi Blog</h1>
 
-    </form>
+        <div class="post">
+            <h2 class="post-title">Título del Post 1</h2>
+            <p class="post-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="#">Leer más...</a></p>
+        </div>
 
-    {% block content %}
+        <div class="post">
+            <h2 class="post-title">Título del Post 2</h2>
+            <p class="post-content">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="#">Leer más...</a></p>
+        </div>
 
-    {% endblock content %}
+        <a href="#" class="new-post-btn">Nuevo Post</a>
 
+        <form class="new-post-form">
+            <input type="text" placeholder="Título del Post" required>
+            <textarea placeholder="Contenido del Post" rows="5" required></textarea>
+            <button type="submit">Publicar</button>
+            
+        </form>
+
+        <a href="#" class="logout-btn">Cerrar Sesión</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Mi Empresa. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
