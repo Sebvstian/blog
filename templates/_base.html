@@ -3,85 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- CSS interno para estilos personalizados -->
+    <title>Oklahoma City Thunder</title>
     <style>
-        /* Estilos generales */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9; /* Fondo suave */
+            background-color: #f4f4f9;
             color: #333;
         }
 
-        /* Navbar personalizada */
         .custom-navbar {
-            background-color: #001a33; /* Azul más oscuro */
-            padding: 10px 20px;
-            position: relative;
+            background-color: #001a33;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
-        .custom-navbar .navbar-brand {
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 2rem;
-            text-align: center;
-            margin: 0;
-        }
-        .custom-navbar .navbar-brand img {
-            display: block;
-            margin: 10px auto 0;
-        }
-        .custom-navbar .navbar-toggler {
+        .navbar-toggler {
             border: none;
             background: none;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            position: absolute;
-            top: 10px;
-            left: 10px;
         }
-        .custom-navbar .navbar-toggler:focus {
-            outline: none;
-        }
-        .custom-navbar .navbar-collapse {
+        .navbar-collapse {
+            display: none;
+            background-color: #001a33;
             position: absolute;
             top: 50px;
-            left: 10px;
-            background-color: #001a33;
-            width: 150px;
-            border-radius: 10px;
-            display: none;
-            z-index: 1000;
+            right: 10px;
+            width: 200px;
+            border-radius: 5px;
         }
-        .custom-navbar .navbar-collapse.show {
+        .navbar-collapse.show {
             display: block;
         }
-        .custom-navbar .nav-link {
-            color: #ffffff;
-            font-size: 1.2rem;
+        .nav-item {
+            list-style: none;
+        }
+        .nav-link {
+            color: #fff;
             padding: 10px;
-            text-transform: uppercase;
-            font-weight: bold;
             display: block;
-            text-align: left;
+            text-decoration: none;
+            text-transform: uppercase;
         }
-        .custom-navbar .nav-link:hover {
+        .nav-link:hover {
             background-color: #003366;
         }
 
-        /* Contenido */
         .container {
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 100px auto;
             padding: 20px;
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Estilos de los títulos */
         h1, h2 {
             font-weight: bold;
             color: #001a33;
@@ -89,207 +70,328 @@
             margin-bottom: 20px;
         }
 
-        /* Estilos para los posts */
-        .post {
-            border-bottom: 1px solid #ddd;
-            padding: 20px 0;
-        }
-        .post:last-child {
-            border-bottom: none;
-        }
-        .post-title {
-            font-size: 1.5rem;
-            color: #001a33;
-            margin-bottom: 10px;
-        }
-        .post-content {
-            font-size: 1rem;
-            color: #555;
-            line-height: 1.6;
-        }
-        .post a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-        .post a:hover {
-            text-decoration: underline;
-        }
-
-        /* Botón Nuevo Post */
-        .new-post-btn {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
+        .player {
+            margin: 10px 0;
             padding: 10px;
-            text-align: center;
-            background-color: #001a33;
-            color: white;
-            font-size: 1.2rem;
-            border-radius: 25px;
-            text-decoration: none;
-            transition: background-color 0.3s ease-in-out;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
         }
-        .new-post-btn:hover {
-            background-color: #003366;
+        .player:hover {
+            background-color: #e6e6e6;
         }
-
-        /* Botón Logout */
-        .logout-btn {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
+        .player-info {
+            display: none;
+            margin-top: 10px;
             padding: 10px;
-            text-align: center;
-            background-color: #001a33;
-            color: white;
-            font-size: 1.2rem;
-            border-radius: 25px;
-            text-decoration: none;
-            transition: background-color 0.3s ease-in-out;
+            background-color: #ffffff;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
-        .logout-btn:hover {
-            background-color: #003366;
-        }
-
-        /* Footer */
         footer {
             text-align: center;
             padding: 10px;
             background-color: #001a33;
-            color: #ffffff;
-            margin-top: 20px;
-        }
-
-        /* Formulario Nuevo Post */
-        .new-post-form {
-            display: none;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .new-post-form input, .new-post-form textarea {
-            width: calc(100% - 20px);
-            margin: 10px auto;
-            padding: 10px;
-            font-size: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .new-post-form button {
-            display: block;
-            width: 100%;
-            margin: 10px auto;
-            padding: 10px;
-            font-size: 1rem;
             color: white;
-            background-color: #001a33;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease-in-out;
-        }
-        .new-post-form button:hover {
-            background-color: #003366;
-        }
-
-        /* Estilos responsive */
-        @media (max-width: 768px) {
-            .custom-navbar .navbar-collapse {
-                width: 100%;
-                left: 0;
-            }
-            .container {
-                padding: 10px;
-                margin: 10px;
-            }
-            .new-post-btn, .logout-btn {
-                width: 100%;
-            }
-            .post {
-                padding: 10px 0;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .custom-navbar .navbar-brand {
-                font-size: 1.5rem;
-            }
-            .custom-navbar .navbar-toggler {
-                font-size: 1.2rem;
-            }
-            .post-title {
-                font-size: 1.2rem;
-            }
-            .post-content {
-                font-size: 0.9rem;
-            }
+            margin-top: 20px;
         }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const toggler = document.querySelector(".navbar-toggler");
             const collapse = document.querySelector(".navbar-collapse");
-            const newPostBtn = document.querySelector(".new-post-btn");
-            const newPostForm = document.querySelector(".new-post-form");
-            const logoutBtn = document.querySelector(".logout-btn");
 
             toggler.addEventListener("click", function(e) {
                 e.stopPropagation();
                 collapse.classList.toggle("show");
             });
 
-            document.addEventListener("click", function() {
-                collapse.classList.remove("show");
+            document.addEventListener("click", function(e) {
+                if (!collapse.contains(e.target) && collapse.classList.contains("show")) {
+                    collapse.classList.remove("show");
+                }
             });
 
-            newPostBtn.addEventListener("click", function(e) {
-                e.preventDefault();
-                newPostForm.style.display = newPostForm.style.display === "none" ? "block" : "none";
-            });
-
-            logoutBtn.addEventListener("click", function(e) {
-                e.preventDefault();
-                alert("Has cerrado sesión correctamente.");
-                window.location.href = "logout.html";
+            document.querySelectorAll(".player").forEach(player => {
+                player.addEventListener("click", function() {
+                    const info = this.querySelector(".player-info");
+                    info.style.display = info.style.display === "none" ? "block" : "none";
+                });
             });
         });
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg custom-navbar">
-        <div class="container-fluid">
-            <!-- Nombre de la empresa -->
-            <div class="navbar-brand">Mi Empresa</div>
-            <img src="logo.png" alt="Logo" width="80" height="80" class="navbar-brand">
-            <!-- Botón de colapso para móviles -->
-            <button class="navbar-toggler" type="button">&#9776;</button>
-            <!-- Elementos de la navbar -->
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Acerca de</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contacto</a>
-                    </li>
-                </ul>
-            </div>
+    <nav class="custom-navbar">
+        <button class="navbar-toggler">&#9776;</button>
+        <div class="navbar-collapse">
+            <ul>
+                <li class="nav-item"><a href="#team" class="nav-link">Equipo</a></li>
+                <li class="nav-item"><a href="#players" class="nav-link">Jugadores</a></li>
+                <li class="nav-item"><a href="#achievements" class="nav-link">Logros</a></li>
+            </ul>
         </div>
     </nav>
 
     <div class="container">
-        <h1>Bienvenidos a Mi Blog</h1>
+        <section id="team">
+            <h1>Oklahoma City Thunder</h1>
+            <p>El Oklahoma City Thunder es un equipo profesional de baloncesto de la NBA. Con sede en Oklahoma City, han demostrado ser un equipo competitivo con una rica historia.</p>
+        </section>
 
-        <div class="post">
-            <h2 class="post-title">Título del Post 1</h2>
-            <p class="post-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="#">Leer más...</a></p>
-        </div>
+        <section id="players">
+            <h2>Plantilla 2025</h2>
+            <div class="player">
+                <h3>Shai Gilgeous-Alexander</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Base / Escolta</p>
+                    <p><strong>Estatura:</strong> 1.98 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 12 de julio de 1998</p>
+                    <p><strong>Temporadas en el equipo:</strong> 6</p>
+                    <p><strong>Contrato:</strong> $180 millones hasta 2027</p>
+                    <p><strong>Récords:</strong> Promedio de 31 puntos por partido en 2023</p>
+                </div>
+            </div>
 
-        <div class="post">
-            <h2 class="post-title">Título del Post 2</h2>
-            <p class="post-content">Sed do eiusmod tempor incididunt ut labore
+            <div class="player">
+                <h3>Chet Holmgren</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Ala-Pívot / Pívot</p>
+                    <p><strong>Estatura:</strong> 2.13 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 1 de mayo de 2002</p>
+                    <p><strong>Temporadas en el equipo:</strong> 2</p>
+                    <p><strong>Contrato:</strong> $44 millones hasta 2026</p>
+                    <p><strong>Récords:</strong> Mejor rookie defensivo en 2024</p>
+                </div>
+            </div>
+
+            <div class="player">
+                <h3>Ajay Mitchell</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Base</p>
+                    <p><strong>Estatura:</strong> 1.88 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 15 de agosto de 2000</p>
+                    <p><strong>Temporadas en el equipo:</strong> 1</p>
+                    <p><strong>Contrato:</strong> $2 millones hasta 2026</p>
+                </div>
+            </div>
+
+            <div class="player">
+                <h3>Isaiah Joe</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Escolta</p>
+                    <p><strong>Estatura:</strong> 1.93 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 2 de julio de 1999</p>
+                    <p><strong>Temporadas en el equipo:</strong> 3</p>
+                    <p><strong>Contrato:</strong> $5 millones hasta 2025</p>
+                </div>
+            </div>
+
+            <div class="player">
+                <h3>Isaiah Hartenstein</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Pívot</p>
+                    <p><strong>Estatura:</strong> 2.13 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 5 de mayo de 1998</p>
+                    <p><strong>Temporadas en el equipo:</strong> 2</p>
+                    <p><strong>Contrato:</strong> $8 millones hasta 2026</p>
+                </div>
+            </div>
+
+            <div class="player">
+                <h3>Isaiah Hartenstein</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Pívot</p>
+                    <p><strong>Estatura:</strong> 2.13 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 5 de mayo de 1998</p>
+                    <p><strong>Temporadas en el equipo:</strong> 2</p>
+                    <p><strong>Contrato:</strong> $8 millones hasta 2026</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Ajay Mitchell</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Base</p>
+                    <p><strong>Estatura:</strong> 1.96 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 13 de febrero de 2002</p>
+                    <p><strong>Temporadas en el equipo:</strong> 1</p>
+                    <p><strong>Contrato:</strong> $1.8 millones hasta 2025</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Isaiah Joe</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Escolta</p>
+                    <p><strong>Estatura:</strong> 1.98 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 2 de julio de 1999</p>
+                    <p><strong>Temporadas en el equipo:</strong> 2</p>
+                    <p><strong>Contrato:</strong> $4.5 millones hasta 2026</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Dillon Jones</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Ala-pívot</p>
+                    <p><strong>Estatura:</strong> 2.06 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 10 de octubre de 2001</p>
+                    <p><strong>Temporadas en el equipo:</strong> 1</p>
+                    <p><strong>Contrato:</strong> $1.2 millones hasta 2025</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Luguentz Dort</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Escolta</p>
+                    <p><strong>Estatura:</strong> 1.98 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 19 de abril de 1999</p>
+                    <p><strong>Temporadas en el equipo:</strong> 4</p>
+                    <p><strong>Contrato:</strong> $87.5 millones hasta 2027</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Jaylin Williams</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Ala-pívot</p>
+                    <p><strong>Estatura:</strong> 2.06 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 25 de julio de 2002</p>
+                    <p><strong>Temporadas en el equipo:</strong> 2</p>
+                    <p><strong>Contrato:</strong> $3.5 millones hasta 2026</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Jalen Williams</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Escolta</p>
+                    <p><strong>Estatura:</strong> 1.98 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 14 de abril de 2002</p>
+                    <p><strong>Temporadas en el equipo:</strong> 2</p>
+                    <p><strong>Contrato:</strong> $5 millones hasta 2026</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Adam Flagler</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Base</p>
+                    <p><strong>Estatura:</strong> 1.96 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 12 de febrero de 2000</p>
+                    <p><strong>Temporadas en el equipo:</strong> 1</p>
+                    <p><strong>Contrato:</strong> $1.5 millones hasta 2025</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Alex Caruso</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Base</p>
+                    <p><strong>Estatura:</strong> 1.98 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 28 de febrero de 1994</p>
+                    <p><strong>Temporadas en el equipo:</strong> 4</p>
+                    <p><strong>Contrato:</strong> $9 millones hasta 2026</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Kenrich Williams</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Ala-pívot</p>
+                    <p><strong>Estatura:</strong> 2.01 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 2 de febrero de 1994</p>
+                    <p><strong>Temporadas en el equipo:</strong> 5</p>
+                    <p><strong>Contrato:</strong> $8 millones hasta 2025</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Ousmane Dieng</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Ala-pívot</p>
+                    <p><strong>Estatura:</strong> 2.06 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 21 de mayo de 2003</p>
+                    <p><strong>Temporadas en el equipo:</strong> 2</p>
+                    <p><strong>Contrato:</strong> $3.2 millones hasta 2026</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Branden Carlson</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Pívot</p>
+                    <p><strong>Estatura:</strong> 2.18 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 17 de diciembre de 2000</p>
+                    <p><strong>Temporadas en el equipo:</strong> 1</p>
+                    <p><strong>Contrato:</strong> $1.2 millones hasta 2025</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Cason Wallace</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Base</p>
+                    <p><strong>Estatura:</strong> 1.96 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 12 de noviembre de 2002</p>
+                    <p><strong>Temporadas en el equipo:</strong> 1</p>
+                    <p><strong>Contrato:</strong> $4.5 millones hasta 2026</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Nikola Topic</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Ala-pívot</p>
+                    <p><strong>Estatura:</strong> 2.06 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 23 de agosto de 2001</p>
+                    <p><strong>Temporadas en el equipo:</strong> 1</p>
+                    <p><strong>Contrato:</strong> $1.5 millones hasta 2025</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Alex Ducas</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Alero</p>
+                    <p><strong>Estatura:</strong> 2.01 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 6 de enero de 2000</p>
+                    <p><strong>Temporadas en el equipo:</strong> 1</p>
+                    <p><strong>Contrato:</strong> $1.2 millones hasta 2025</p>
+                </div>
+            </div>
+            
+            <div class="player">
+                <h3>Aaron Wiggins</h3>
+                <div class="player-info">
+                    <p><strong>Posición:</strong> Escolta</p>
+                    <p><strong>Estatura:</strong> 1.98 m</p>
+                    <p><strong>Fecha de Nacimiento:</strong> 13 de abril de 1999</p>
+                    <p><strong>Temporadas en el equipo:</strong> 3</p>
+                    <p><strong>Contrato:</strong> $4 millones hasta 2025</p>
+                </div>
+            </div>            
+
+            <!-- Más jugadores con el mismo formato... -->
+        </section>
+
+        <section id="achievements">
+            <h2>Logros y Récords Históricos</h2>
+            <ul>
+                <li>Campeones de la Conferencia Oeste en 2012</li>
+                <li>Finalistas de la NBA en 2012</li>
+                <li>Récord de franquicia: 60 victorias en una temporada (2012)</li>
+                <li>Kevin Durant: MVP de la NBA en 2014</li>
+                <li>Russell Westbrook: Promedio de triple-doble durante 3 temporadas consecutivas</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Oklahoma City Thunder - Página oficial no afiliada</p>
+    </footer>
+</body>
+</html>
